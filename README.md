@@ -15,3 +15,9 @@ Your OML is calculated by taking in a number of weighted parameters:
 - Performance improvements; mobile friendliness
 - Show branch breakdown
 - Update ADM4 calculatons
+
+## Potential name change ideas
+- rOMuLus
+- rOMuluS
+- ROMuluS
+- romULUs
