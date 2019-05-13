@@ -14,3 +14,4 @@ Your OML is calculated by taking in a number of weighted parameters:
 - Overall design improvements
 - Performance improvements; mobile friendliness
 - Show branch breakdown
+- Update ADM4 calculatons
