@@ -34,13 +34,13 @@
     <mat-step [stepControl]="langFormGroup">
       <form [formGroup]="langFormGroup">
         <ng-template matStepLabel>Language</ng-template>
-        <mat-checkbox matInput [(ngModel)]="yearsStratLangMaj"
+        <mat-checkbox matInput [(ngModel)]="stratLangMaj"
                       formControlName="langCtrl"
         >
         Strategic Language Major?
         </mat-checkbox>
         <br>
-        <mat-checkbox matInput [(ngModel)]="yearsNonstratLangMaj"
+        <mat-checkbox matInput [(ngModel)]="nonstratLangMaj"
         formControlName="langCtrl"
         >
         Nonstrategic Language Major?
@@ -97,6 +97,12 @@
             <mat-option *ngFor="let gra of coerOMSOpts" value="{{gra}}">{{gra}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <br>
+        <mat-checkbox matInput [(ngModel)]="recondo"
+        formControlName="acCtrl"
+        >
+        Recondo
+        </mat-checkbox>
 
         <hr>
         <div>
@@ -489,22 +495,30 @@
     <!-- DONE -->
     <mat-step>
       <ng-template matStepLabel>Calculate</ng-template>
-      <b>POINTS TOTAL ??</b>
+      <button mat-button (click)="calculateAll()">Calculate</button>
+      <br>
+      <b>POINTS TOTAL {{totalPoints}}</b>
       <hr>
-      <p>Points from GPA: ??</p>
-      <p>Points from ADM4: ??</p>
+      <p>Points from GPA: {{gpaPoints}} ( {{maxGPAPoints - gpaPoints}} left )</p>
+      <p>Points from ADM4: {{admPoints}} ( {{maxADMPoints - admPoints}} left )</p>
       <br>
-      <p>Points from PMS Evaluation: ??</p>
-      <p>Points from PMS Ranking: ??</p>
+      <p>Points from Language: {{languagePoints}} ( {{maxLanguagePoints - languagePoints}} left )</p>
       <br>
-      <p>Points from Camp Grade: ??</p>
-      <p>Recondo: ??</p>
+      <p>Points from PMS Evaluation: {{pmspOMSPoints}} ( {{maxPMSOMSPoints - pmspOMSPoints}} left )</p>
+      <p>Points from PMS Ranking: {{pmsRankingPoints}} ( {{maxRankingPoints - pmsRankingPoints}} left )</p>
       <br>
-      <p>Points from Extracurriculars: ??</p>
+      <p>Points from Camp Grade: {{coerOMSPoints}} ( {{maxCampPoints - coerOMSPoints}} left )</p>
+      <p>Recondo: {{recondoPoints}} ( {{maxRecondoPoints - recondoPoints}} left )</p>
       <br>
-      <p>Points from APFT: ??</p>
+      <p>Points from Extracurriculars: {{extracurricularPoints}} ( {{maxExtracurricularPoints - extracurricularPoints}} left )</p>
       <br>
-      <p>Points from Athletics: ??</p>
+      <p>Points from Maturity/Responsibility: {{maturityResponsibilityPoints}} ( {{maxMaturityResponsibilityPoints - maturityResponsibilityPoints}} left )</p>
+      <br>
+      <p>Points from Fall APFT: {{fallAPFTPoints}} ( {{maxFallAPFTPoints - fallAPFTPoints}} left )</p>
+      <p>Points from Spring APFT: {{springAPFTPoints}} ( {{maxSpringAPFTPoints - springAPFTPoints}} left )</p>
+      <p>Points from Camp APFT: {{acAPFTPoints}} ( {{maxACAPFTPoints - acAPFTPoints}} left )</p>
+      <br>
+      <p>Points from Athletics: {{athleticsPoints}} ( {{maxAthleticsPoints - athleticsPoints}} left )</p>
       <br>
       <hr>
       <div>
