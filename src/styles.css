@@ -1,0 +1,26 @@
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+
+html {
+    background-color: #424242;
+}
+
+.col-sm {
+    width: 25%
+}
+
+.col-md {
+    width: 50%;
+}
+
+.col-lg {
+    width: 100%;
+}
+
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: #FFC727 !important;
+    color: #000000 !important;
+}
+
+mat-form-field {
+    color: #FFC727 !important;
+}

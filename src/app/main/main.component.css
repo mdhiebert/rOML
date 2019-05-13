@@ -1,0 +1,30 @@
+html {background-color: white}
+
+button {
+    background-color: #FFC727;
+    color: #000000;
+}
+
+mat-step-icon-selected {
+    background-color: #FFC727;
+    color: #000000;
+}
+
+input {
+    /* background-color: #FFC727; */
+}
+
+mat-vertical-stepper {
+    /* background-color: transparent; */
+    color: #CC9910;
+}
+
+.ec-arr-box {
+    width: 25%;
+    text-align: center;
+    float: left;
+}
+
+.ec-container {
+    overflow: hidden;
+}
