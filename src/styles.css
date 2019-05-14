@@ -25,6 +25,24 @@ mat-form-field {
     color: #FFC727 !important;
 }
 
+.mat-focused {
+    color: #FFC727 !important;
+}
+
+.mat-form-field-ripple {
+    background-color: #FFC727 !important;
+}
+
+/* Controls cursor color! */
+.mat-input-element {
+    caret-color: #FFC727 !important;
+}
+
+/* The placeholder text */
+.mat-form-field-should-float {
+    color: #FFC727 !important;
+}
+
 h1 {
     color: #FFC727;
 }

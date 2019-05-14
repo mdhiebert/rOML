@@ -6,12 +6,11 @@
     <mat-step [stepControl]="gpaAdmFormGroup">
       <form [formGroup]="gpaAdmFormGroup">
         <ng-template matStepLabel>GPA and Major</ng-template>
-        (On a 4.0 scale)
+        GPA (On a 4.0 scale):
         <br>
         <mat-form-field class="col-sm">
           <input matInput [(ngModel)]="gpa" 
-                  type="number" 
-                  placeholder="GPA" 
+                  type="number"
                   formControlName="gpaAdmCtrl" 
                   required>
         </mat-form-field>
@@ -69,9 +68,13 @@
         Ranking:
         <br>
         <mat-form-field>
-            <input matInput [(ngModel)]="ranking" type="number" formControlName="pmspOmsRankingCtrl" required>
-            out of
-            <input matInput [(ngModel)]="totalPeople" type="number" formControlName="pmspOmsRankingCtrl" required>
+          <input matInput [(ngModel)]="ranking" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
+        </mat-form-field>
+        <br>
+        out of
+        <br>
+        <mat-form-field>
+          <input matInput [(ngModel)]="totalPeople" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
         </mat-form-field>
         <br>
         <mat-form-field>
