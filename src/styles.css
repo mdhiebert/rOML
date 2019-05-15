@@ -16,6 +16,24 @@ html {
     width: 100%;
 }
 
+.panel {
+    background-color: black;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px;
+}
+
+.panel-filler {
+    background-color: #424242;
+    color: #FFC727;
+}
+
+.mat-stepper-vertical {
+    /* background-color: transparent; */
+    padding: 10px;
+    border-radius: 10px;
+}
+
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
     background-color: #FFC727 !important;
     color: #000000 !important;
@@ -45,4 +63,16 @@ mat-form-field {
 
 h1 {
     color: #FFC727;
+}
+
+.competitive {
+    color: green !important;
+}
+
+.less-comp {
+    color:yellow !important;
+}
+
+.not-comp {
+    color: red !important;
 }

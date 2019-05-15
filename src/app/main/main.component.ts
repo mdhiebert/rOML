@@ -1,5 +1,6 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import weights from './reference/weights';
 
 @Component({
   selector: 'app-main',
@@ -106,6 +107,12 @@ export class MainComponent implements OnInit {
   maxACAPFTPoints = 6;
   maxAthleticsPoints = 3;
 
+  competitiveList = [];
+  lessCompList = [];
+  notCompList = [];
+
+
+
   // EXTRACURRICULAR EVENT FUNCTIONS
   genericCheck(event, property) {
     this[property] += event.checked ? 1 : -1;
@@ -136,6 +143,8 @@ export class MainComponent implements OnInit {
     this.totalPoints += (this.extracurricularPoints + this.maturityResponsibilityPoints);
     this.totalPoints += (this.fallAPFTPoints + this.springAPFTPoints + this.acAPFTPoints);
     this.totalPoints += this.athleticsPoints;
+
+    this.determineBranchCompetitiveness();
   }
 
   calculateGPA() {
@@ -276,6 +285,22 @@ export class MainComponent implements OnInit {
     if (runningScore > maxVal) { runningScore = maxVal; }
     const fraction = runningScore / maxVal;
     return fraction * maxPoints;
+  }
+
+  determineBranchCompetitiveness() {
+    let detailedName;
+    for (const branch of weights.branchList) {
+      detailedName = weights.detailedBranch[branch];
+      if (this.totalPoints > weights[branch + 'lower55']) {
+        if (this.totalPoints > weights[branch + 'upper55']) {
+          this.competitiveList.push(detailedName);
+        } else {
+          this.lessCompList.push(detailedName);
+        }
+      } else {
+        this.notCompList.push(detailedName);
+      }
+    }
   }
 
   constructor(private formBuilder: FormBuilder) { }

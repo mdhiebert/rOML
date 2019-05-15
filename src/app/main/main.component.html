@@ -1,533 +1,557 @@
 <div>
   <h1>Calculate your OML</h1>
-  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
 
-    <!-- GPA / ADM-->
-    <mat-step [stepControl]="gpaAdmFormGroup">
-      <form [formGroup]="gpaAdmFormGroup">
-        <ng-template matStepLabel>GPA and Major</ng-template>
-        GPA (On a 4.0 scale):
+      <!-- GPA / ADM-->
+      <mat-step [stepControl]="gpaAdmFormGroup">
+        <form [formGroup]="gpaAdmFormGroup">
+          <ng-template matStepLabel>GPA and Major</ng-template>
+          GPA (On a 4.0 scale):
+          <br>
+          <mat-form-field class="col-sm">
+            <input matInput [(ngModel)]="gpa" 
+                    type="number"
+                    formControlName="gpaAdmCtrl" 
+                    required>
+          </mat-form-field>
+          <div class="col-sm"></div>
+          <mat-checkbox matInput [(ngModel)]="adm"
+                  class="col-sm"
+                  type="checkbox"
+                  formControlName="gpaAdmCtrl"
+          >
+            STEM Major?
+          </mat-checkbox>
+          <div class="col-lg"></div>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- LANGUAGE -->
+      <mat-step [stepControl]="langFormGroup">
+        <form [formGroup]="langFormGroup">
+          <ng-template matStepLabel>Language</ng-template>
+          <mat-checkbox matInput [(ngModel)]="stratLangMaj"
+                        formControlName="langCtrl"
+          >
+          Strategic Language Major?
+          </mat-checkbox>
+          <br>
+          <mat-checkbox matInput [(ngModel)]="nonstratLangMaj"
+          formControlName="langCtrl"
+          >
+          Nonstrategic Language Major?
+          </mat-checkbox>
+          <br>
+          Number of Strategic Language Courses:
+          <mat-form-field>
+            <input matInput [(ngModel)]="stratLangCourses" type="number" formControlName="langCtrl" required>
+          </mat-form-field>
+          <br>
+          Number of Non-Strategic Language Courses:
+          <mat-form-field>
+            <input matInput [(ngModel)]="nonStratLangCourses" type="number" formControlName="langCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- PMSP OMS / RANKING -->
+      <mat-step [stepControl]="pmspOmsRankingFormGroup">
+        <form [formGroup]="pmspOmsRankingFormGroup">
+          <ng-template matStepLabel>Potential and Ranking</ng-template>
+          Ranking:
+          <br>
+          <mat-form-field>
+            <input matInput [(ngModel)]="ranking" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
+          </mat-form-field>
+          <br>
+          out of
+          <br>
+          <mat-form-field>
+            <input matInput [(ngModel)]="totalPeople" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>PMS Evaluation</mat-label>
+            <mat-select [(value)]="pmspOMS">
+              <mat-option *ngFor="let pot of pmspOMSOpts" value="{{pot}}">{{pot}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- AC -->
+      <mat-step [stepControl]="acFormGroup">
+        <form [formGroup]="acFormGroup">
+          <ng-template matStepLabel>Advanced Camp</ng-template>
+          <mat-form-field>
+            <mat-label>Grade</mat-label>
+            <mat-select [(value)]="coerOMS">
+              <mat-option *ngFor="let gra of coerOMSOpts" value="{{gra}}">{{gra}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-checkbox matInput [(ngModel)]="recondo"
+          formControlName="acCtrl"
+          >
+          Recondo
+          </mat-checkbox>
+  
+          <hr>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- EXTRACURRICULARS -->
+      <mat-step [stepControl]="extracurricularFormGroup">
+        <form [formGroup]="extracurricularFormGroup">
+          <ng-template matStepLabel>Extracurriculars</ng-template>
+          <div class="ec-container">
+            <div class="ec-arr-box">Type</div>
+            <div class="ec-arr-box">Year 1</div>
+            <div class="ec-arr-box">Year 2</div>
+            <div class="ec-arr-box">Year 3</div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Army Training</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'numberTrainings')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'numberTrainings')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'numberTrainings')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Band</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsBandMember')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsBandMember')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsBandMember')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Color Guard</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsColorGuard')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsColorGuard')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsColorGuard')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Community Service</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsCommunityService')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsCommunityService')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsCommunityService')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Debate Team</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDebateTeam')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDebateTeam')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDebateTeam')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Drill Team</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDrillTeam')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDrillTeam')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDrillTeam')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Elected Official</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsElectedOfficial')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsElectedOfficial')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsElectedOfficial')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Leader/ President/ Captain</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsLeaderPresidentCaptain')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsLeaderPresidentCaptain')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsLeaderPresidentCaptain')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Tutor</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsTutor')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsTutor')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsTutor')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">ROTC Recruiter</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsROTCRecruiter')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsROTCRecruiter')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsROTCRecruiter')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Ranger Challenge</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsRangerChallenge')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsRangerChallenge')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsRangerChallenge')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Resident Advisor</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsResidentAdvisor')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsResidentAdvisor')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsResidentAdvisor')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Student Government</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsStudentGovernment')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsStudentGovernment')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsStudentGovernment')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- MATURITY -->
+      <mat-step [stepControl]="maturityFormGroup">
+        <form [formGroup]="maturityFormGroup">
+          <ng-template matStepLabel>Maturity and Responsibility</ng-template>
+          <div class="ec-container">
+            <div class="ec-arr-box">Type</div>
+            <div class="ec-arr-box">Year 1</div>
+            <div class="ec-arr-box">Year 2</div>
+            <div class="ec-arr-box">Year 3</div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Part-time Job</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsPartTime')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsPartTime')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsPartTime')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Full-time Job</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsFullTime')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsFullTime')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsFullTime')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">USAR/ NG/ SMP</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'usarNGSMP')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'usarNGSMP')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'usarNGSMP')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- APFT -->
+      <mat-step [stepControl]="apftFormGroup">
+        <form [formGroup]="apftFormGroup">
+          <ng-template matStepLabel>APFT</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Fall APFT"
+                    type="number"
+                    [(ngModel)]="fallAPFT"
+                    formControlName="apftCtrl"
+                    min="0"
+                    max="300">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Spring APFT"
+                    type="number"
+                    [(ngModel)]="springAPFT"
+                    formControlName="apftCtrl"
+                    min="0"
+                    max="300">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Camp APFT"
+                    type="number"
+                    [(ngModel)]="acAPFT"
+                    formControlName="apftCtrl"
+                    min="0"
+                    max="300">
+          </mat-form-field>
+          <hr>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+      <!-- ATHLETICS -->
+      <mat-step [stepControl]="athleticsFormGroup">
+        <form [formGroup]="athleticsFormGroup">
+          <ng-template matStepLabel>Athletics</ng-template>
+          <div class="ec-container">
+            <div class="ec-arr-box">Type</div>
+            <div class="ec-arr-box">Year 1</div>
+            <div class="ec-arr-box">Year 2</div>
+            <div class="ec-arr-box">Year 3</div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Community Athletics</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsCommunityAthletics')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsCommunityAthletics')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsCommunityAthletics')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Intramural Athletics</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsIM')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsIM')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsIM')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+  
+          <div class="ec-container">
+            <div class="ec-arr-box">Varsity Athletics</div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsVarsity')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsVarsity')"></mat-checkbox>
+            </div>
+            <div class="ec-arr-box">
+                <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsVarsity')"></mat-checkbox>
+            </div>
+          </div>
+  
+          <hr>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      
+      <!-- DONE -->
+      <mat-step>
+        <ng-template matStepLabel>Calculate</ng-template>
+        <button mat-button (click)="calculateAll()">Calculate</button>
         <br>
-        <mat-form-field class="col-sm">
-          <input matInput [(ngModel)]="gpa" 
-                  type="number"
-                  formControlName="gpaAdmCtrl" 
-                  required>
-        </mat-form-field>
-        <div class="col-sm"></div>
-        <mat-checkbox matInput [(ngModel)]="adm"
-                class="col-sm"
-                type="checkbox"
-                formControlName="gpaAdmCtrl"
-        >
-          STEM Major?
-        </mat-checkbox>
-        <div class="col-lg"></div>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- LANGUAGE -->
-    <mat-step [stepControl]="langFormGroup">
-      <form [formGroup]="langFormGroup">
-        <ng-template matStepLabel>Language</ng-template>
-        <mat-checkbox matInput [(ngModel)]="stratLangMaj"
-                      formControlName="langCtrl"
-        >
-        Strategic Language Major?
-        </mat-checkbox>
+        <b>POINTS TOTAL {{totalPoints}}</b>
+        <hr>
+        <p>Points from GPA: {{gpaPoints}} ( {{maxGPAPoints - gpaPoints}} left )</p>
+        <p>Points from ADM4: {{admPoints}} ( {{maxADMPoints - admPoints}} left )</p>
         <br>
-        <mat-checkbox matInput [(ngModel)]="nonstratLangMaj"
-        formControlName="langCtrl"
-        >
-        Nonstrategic Language Major?
-        </mat-checkbox>
+        <p>Points from Language: {{languagePoints}} ( {{maxLanguagePoints - languagePoints}} left )</p>
         <br>
-        Number of Strategic Language Courses:
-        <mat-form-field>
-          <input matInput [(ngModel)]="stratLangCourses" type="number" formControlName="langCtrl" required>
-        </mat-form-field>
+        <p>Points from PMS Evaluation: {{pmspOMSPoints}} ( {{maxPMSOMSPoints - pmspOMSPoints}} left )</p>
+        <p>Points from PMS Ranking: {{pmsRankingPoints}} ( {{maxRankingPoints - pmsRankingPoints}} left )</p>
         <br>
-        Number of Non-Strategic Language Courses:
-        <mat-form-field>
-          <input matInput [(ngModel)]="nonStratLangCourses" type="number" formControlName="langCtrl" required>
-        </mat-form-field>
+        <p>Points from Camp Grade: {{coerOMSPoints}} ( {{maxCampPoints - coerOMSPoints}} left )</p>
+        <p>Recondo: {{recondoPoints}} ( {{maxRecondoPoints - recondoPoints}} left )</p>
+        <br>
+        <p>Points from Extracurriculars: {{extracurricularPoints}} ( {{maxExtracurricularPoints - extracurricularPoints}} left )</p>
+        <br>
+        <p>Points from Maturity/Responsibility: {{maturityResponsibilityPoints}} ( {{maxMaturityResponsibilityPoints - maturityResponsibilityPoints}} left )</p>
+        <br>
+        <p>Points from Fall APFT: {{fallAPFTPoints}} ( {{maxFallAPFTPoints - fallAPFTPoints}} left )</p>
+        <p>Points from Spring APFT: {{springAPFTPoints}} ( {{maxSpringAPFTPoints - springAPFTPoints}} left )</p>
+        <p>Points from Camp APFT: {{acAPFTPoints}} ( {{maxACAPFTPoints - acAPFTPoints}} left )</p>
+        <br>
+        <p>Points from Athletics: {{athleticsPoints}} ( {{maxAthleticsPoints - athleticsPoints}} left )</p>
+        <br>
+        <hr>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext>Branching</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
-      </form>
-    </mat-step>
-
-    <!-- PMSP OMS / RANKING -->
-    <mat-step [stepControl]="pmspOmsRankingFormGroup">
-      <form [formGroup]="pmspOmsRankingFormGroup">
-        <ng-template matStepLabel>Potential and Ranking</ng-template>
-        Ranking:
-        <br>
-        <mat-form-field>
-          <input matInput [(ngModel)]="ranking" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
-        </mat-form-field>
-        <br>
-        out of
-        <br>
-        <mat-form-field>
-          <input matInput [(ngModel)]="totalPeople" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <mat-label>PMS Evaluation</mat-label>
-          <mat-select [(value)]="pmspOMS">
-            <mat-option *ngFor="let pot of pmspOMSOpts" value="{{pot}}">{{pot}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- AC -->
-    <mat-step [stepControl]="acFormGroup">
-      <form [formGroup]="acFormGroup">
-        <ng-template matStepLabel>Advanced Camp</ng-template>
-        <mat-form-field>
-          <mat-label>Grade</mat-label>
-          <mat-select [(value)]="coerOMS">
-            <mat-option *ngFor="let gra of coerOMSOpts" value="{{gra}}">{{gra}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <br>
-        <mat-checkbox matInput [(ngModel)]="recondo"
-        formControlName="acCtrl"
-        >
-        Recondo
-        </mat-checkbox>
-
-        <hr>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- EXTRACURRICULARS -->
-    <mat-step [stepControl]="extracurricularFormGroup">
-      <form [formGroup]="extracurricularFormGroup">
-        <ng-template matStepLabel>Extracurriculars</ng-template>
-        <div class="ec-container">
-          <div class="ec-arr-box">Type</div>
-          <div class="ec-arr-box">Year 1</div>
-          <div class="ec-arr-box">Year 2</div>
-          <div class="ec-arr-box">Year 3</div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Army Training</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'numberTrainings')"></mat-checkbox>
+      </mat-step>
+      <mat-step>
+          <ng-template matStepLabel>Branching</ng-template>
+          <b>OMS: {{totalPoints}} points</b>
+          <hr>
+          <b class="competitive">You are competitive for...</b>
+          <br>
+          <ul>
+            <li class="competitive" *ngFor="let branch of competitiveList">{{branch}}</li>
+          </ul>
+          <br>
+          <b class="less-comp">You are <i>less</i> competitive for...</b>
+          <ul>
+            <li class="less-comp" *ngFor="let branch of lessCompList">{{branch}}</li>
+          </ul>
+          <br>
+          <b class="not-comp">You are not competitive for...</b>
+          <ul>
+            <li class="not-comp" *ngFor="let branch of notCompList">{{branch}}</li>
+          </ul>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
           </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'numberTrainings')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'numberTrainings')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Band</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsBandMember')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsBandMember')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsBandMember')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Color Guard</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsColorGuard')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsColorGuard')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsColorGuard')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Community Service</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsCommunityService')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsCommunityService')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsCommunityService')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Debate Team</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDebateTeam')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDebateTeam')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDebateTeam')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Drill Team</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDrillTeam')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDrillTeam')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsDrillTeam')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Elected Official</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsElectedOfficial')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsElectedOfficial')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsElectedOfficial')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Leader/ President/ Captain</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsLeaderPresidentCaptain')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsLeaderPresidentCaptain')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsLeaderPresidentCaptain')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Tutor</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsTutor')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsTutor')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsTutor')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">ROTC Recruiter</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsROTCRecruiter')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsROTCRecruiter')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsROTCRecruiter')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Ranger Challenge</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsRangerChallenge')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsRangerChallenge')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsRangerChallenge')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Resident Advisor</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsResidentAdvisor')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsResidentAdvisor')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsResidentAdvisor')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Student Government</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsStudentGovernment')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsStudentGovernment')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="extracurricularCtrl" (change)="genericCheck($event, 'yearsStudentGovernment')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- MATURITY -->
-    <mat-step [stepControl]="maturityFormGroup">
-      <form [formGroup]="maturityFormGroup">
-        <ng-template matStepLabel>Maturity and Responsibility</ng-template>
-        <div class="ec-container">
-          <div class="ec-arr-box">Type</div>
-          <div class="ec-arr-box">Year 1</div>
-          <div class="ec-arr-box">Year 2</div>
-          <div class="ec-arr-box">Year 3</div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Part-time Job</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsPartTime')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsPartTime')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsPartTime')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Full-time Job</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsFullTime')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsFullTime')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'yearsFullTime')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">USAR/ NG/ SMP</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'usarNGSMP')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'usarNGSMP')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="maturityCtrl" (change)="genericCheck($event, 'usarNGSMP')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- APFT -->
-    <mat-step [stepControl]="apftFormGroup">
-      <form [formGroup]="apftFormGroup">
-        <ng-template matStepLabel>APFT</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Fall APFT"
-                  type="number"
-                  [(ngModel)]="fallAPFT"
-                  formControlName="apftCtrl"
-                  min="0"
-                  max="300">
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input matInput placeholder="Spring APFT"
-                  type="number"
-                  [(ngModel)]="springAPFT"
-                  formControlName="apftCtrl"
-                  min="0"
-                  max="300">
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-          <input matInput placeholder="Camp APFT"
-                  type="number"
-                  [(ngModel)]="acAPFT"
-                  formControlName="apftCtrl"
-                  min="0"
-                  max="300">
-        </mat-form-field>
-        <hr>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- ATHLETICS -->
-    <mat-step [stepControl]="athleticsFormGroup">
-      <form [formGroup]="athleticsFormGroup">
-        <ng-template matStepLabel>Athletics</ng-template>
-        <div class="ec-container">
-          <div class="ec-arr-box">Type</div>
-          <div class="ec-arr-box">Year 1</div>
-          <div class="ec-arr-box">Year 2</div>
-          <div class="ec-arr-box">Year 3</div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Community Athletics</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsCommunityAthletics')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsCommunityAthletics')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsCommunityAthletics')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Intramural Athletics</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsIM')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsIM')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsIM')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="ec-container">
-          <div class="ec-arr-box">Varsity Athletics</div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsVarsity')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsVarsity')"></mat-checkbox>
-          </div>
-          <div class="ec-arr-box">
-              <mat-checkbox matInput formControlName="athleticsCtrl" (change)="genericCheck($event, 'yearsVarsity')"></mat-checkbox>
-          </div>
-        </div>
-
-        <hr>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    
-    <!-- DONE -->
-    <mat-step>
-      <ng-template matStepLabel>Calculate</ng-template>
-      <button mat-button (click)="calculateAll()">Calculate</button>
-      <br>
-      <b>POINTS TOTAL {{totalPoints}}</b>
-      <hr>
-      <p>Points from GPA: {{gpaPoints}} ( {{maxGPAPoints - gpaPoints}} left )</p>
-      <p>Points from ADM4: {{admPoints}} ( {{maxADMPoints - admPoints}} left )</p>
-      <br>
-      <p>Points from Language: {{languagePoints}} ( {{maxLanguagePoints - languagePoints}} left )</p>
-      <br>
-      <p>Points from PMS Evaluation: {{pmspOMSPoints}} ( {{maxPMSOMSPoints - pmspOMSPoints}} left )</p>
-      <p>Points from PMS Ranking: {{pmsRankingPoints}} ( {{maxRankingPoints - pmsRankingPoints}} left )</p>
-      <br>
-      <p>Points from Camp Grade: {{coerOMSPoints}} ( {{maxCampPoints - coerOMSPoints}} left )</p>
-      <p>Recondo: {{recondoPoints}} ( {{maxRecondoPoints - recondoPoints}} left )</p>
-      <br>
-      <p>Points from Extracurriculars: {{extracurricularPoints}} ( {{maxExtracurricularPoints - extracurricularPoints}} left )</p>
-      <br>
-      <p>Points from Maturity/Responsibility: {{maturityResponsibilityPoints}} ( {{maxMaturityResponsibilityPoints - maturityResponsibilityPoints}} left )</p>
-      <br>
-      <p>Points from Fall APFT: {{fallAPFTPoints}} ( {{maxFallAPFTPoints - fallAPFTPoints}} left )</p>
-      <p>Points from Spring APFT: {{springAPFTPoints}} ( {{maxSpringAPFTPoints - springAPFTPoints}} left )</p>
-      <p>Points from Camp APFT: {{acAPFTPoints}} ( {{maxACAPFTPoints - acAPFTPoints}} left )</p>
-      <br>
-      <p>Points from Athletics: {{athleticsPoints}} ( {{maxAthleticsPoints - athleticsPoints}} left )</p>
-      <br>
-      <hr>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-vertical-stepper>
+        </mat-step>
+    </mat-vertical-stepper>
 </div>
