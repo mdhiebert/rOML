@@ -288,6 +288,10 @@ export class MainComponent implements OnInit {
   }
 
   determineBranchCompetitiveness() {
+    this.competitiveList = [];
+    this.lessCompList = [];
+    this.notCompList = [];
+
     let detailedName;
     for (const branch of weights.branchList) {
       detailedName = weights.detailedBranch[branch];

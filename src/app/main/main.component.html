@@ -1,6 +1,20 @@
 <div>
-  <h1>Calculate your OML</h1>
+  <div class="center-panel">
     <mat-vertical-stepper [linear]="isLinear" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Begin</ng-template>
+        Use this tool to calculate your OMS under the FY19 model. If there are any questions about whether or not you qualify 
+        for any of the fields (or questions about OMS in general), please refer to the regulation 
+        <a href="https://www.cadetcommand.army.mil/res/files/forms_policies/circulars/USACC%20Circular%20601-20-1%20Reserve%20Officers'%20Training%20Corps%20Accessions%20Fiscal%20Year%202020%2003-01-2019.pdf">
+          *here*
+        </a> 
+        or ask your cadre.
+        <br>
+        <br>
+        <div>
+          <button mat-button matStepperNext>Begin</button>
+        </div>
+      </mat-step>
 
       <!-- GPA / ADM-->
       <mat-step [stepControl]="gpaAdmFormGroup">
@@ -11,8 +25,7 @@
           <mat-form-field class="col-sm">
             <input matInput [(ngModel)]="gpa" 
                     type="number"
-                    formControlName="gpaAdmCtrl" 
-                    required>
+                    formControlName="gpaAdmCtrl" >
           </mat-form-field>
           <div class="col-sm"></div>
           <mat-checkbox matInput [(ngModel)]="adm"
@@ -22,10 +35,11 @@
           >
             STEM Major?
           </mat-checkbox>
-          <div class="col-lg"></div>
+          <hr>
           <div>
-            <button mat-button matStepperNext>Next</button>
-          </div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
         </form>
       </mat-step>
   
@@ -45,15 +59,17 @@
           Nonstrategic Language Major?
           </mat-checkbox>
           <br>
-          Number of Strategic Language Courses:
+          <br>
           <mat-form-field>
-            <input matInput [(ngModel)]="stratLangCourses" type="number" formControlName="langCtrl" required>
+            <mat-label>Strategic Language Courses</mat-label>
+            <input matInput [(ngModel)]="stratLangCourses" type="number" formControlName="langCtrl">
           </mat-form-field>
           <br>
-          Number of Non-Strategic Language Courses:
           <mat-form-field>
-            <input matInput [(ngModel)]="nonStratLangCourses" type="number" formControlName="langCtrl" required>
+            <mat-label>Non-Strategic Language Courses</mat-label>
+            <input matInput [(ngModel)]="nonStratLangCourses" type="number" formControlName="langCtrl">
           </mat-form-field>
+          <hr>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
@@ -65,16 +81,15 @@
       <mat-step [stepControl]="pmspOmsRankingFormGroup">
         <form [formGroup]="pmspOmsRankingFormGroup">
           <ng-template matStepLabel>Potential and Ranking</ng-template>
-          Ranking:
           <br>
           <mat-form-field>
-            <input matInput [(ngModel)]="ranking" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
+            <mat-label>Ranking (1 is highest)</mat-label>
+            <input matInput [(ngModel)]="ranking" type="number" class="number" formControlName="pmspOmsRankingCtrl">
           </mat-form-field>
           <br>
-          out of
-          <br>
           <mat-form-field>
-            <input matInput [(ngModel)]="totalPeople" type="number" class="number" formControlName="pmspOmsRankingCtrl" required>
+            <mat-label>Total People in MS Year</mat-label>
+            <input matInput [(ngModel)]="totalPeople" type="number" class="number" formControlName="pmspOmsRankingCtrl">
           </mat-form-field>
           <br>
           <mat-form-field>
@@ -83,6 +98,7 @@
               <mat-option *ngFor="let pot of pmspOMSOpts" value="{{pot}}">{{pot}}</mat-option>
             </mat-select>
           </mat-form-field>
+          <hr>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
@@ -554,4 +570,5 @@
           </div>
         </mat-step>
     </mat-vertical-stepper>
+  </div>
 </div>

@@ -1,7 +1,52 @@
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 
 html {
-    background-color: #424242;
+    background-color: black;
+}
+
+.logo {
+    display: inline-block;
+}
+
+.toolbar {
+    display: inline-block;
+    width: fit-content;
+}
+
+.toolbar-button {
+    color: black;
+    background-color: #FFC727;
+    width: 25% !important;
+}
+
+.fiscal-year {
+    color: #685D40;
+}
+
+.subtext {
+    text-align: center;
+    margin: 10px;
+    color: gray;
+}
+
+a {
+    color: #FFC727;
+}
+
+a:hover {
+    color: yellow;
+} 
+
+a:active {
+    color: yellow;
+}
+
+a:visited {
+    color: FFC727;
+}
+
+button {
+    margin: 2px !important;
 }
 
 .col-sm {
@@ -14,6 +59,12 @@ html {
 
 .col-lg {
     width: 100%;
+}
+
+.center-panel {
+    margin-left: 5%;
+    margin-right: 5%;
+    /* background-color: #424242; */
 }
 
 .panel {
@@ -30,8 +81,7 @@ html {
 
 .mat-stepper-vertical {
     /* background-color: transparent; */
-    padding: 10px;
-    border-radius: 10px;
+    border-radius: 25px;
 }
 
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
@@ -49,6 +99,21 @@ mat-form-field {
 
 .mat-form-field-ripple {
     background-color: #FFC727 !important;
+}
+
+/* The select arrow */
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #FFC727 !important;
+}
+
+/* The placeholder field */
+.mat-form-field.mat-focused .mat-form-field-label {
+    color: #FFC727 !important;
+}
+
+/* Select field options */
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #FFC727;
 }
 
 /* Controls cursor color! */
