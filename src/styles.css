@@ -6,6 +6,8 @@ html {
 
 .logo {
     display: inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .toolbar {
@@ -87,6 +89,7 @@ button {
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
     background-color: #FFC727 !important;
     color: #000000 !important;
+    border-radius: 25px !important;
 }
 
 mat-form-field {

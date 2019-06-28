@@ -25,6 +25,8 @@
           <mat-form-field class="col-sm">
             <input matInput [(ngModel)]="gpa" 
                     type="number"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
                     formControlName="gpaAdmCtrl" >
           </mat-form-field>
           <div class="col-sm"></div>
@@ -62,12 +64,12 @@
           <br>
           <mat-form-field>
             <mat-label>Strategic Language Courses</mat-label>
-            <input matInput [(ngModel)]="stratLangCourses" type="number" formControlName="langCtrl">
+            <input matInput [(ngModel)]="stratLangCourses" type="number" inputmode="numeric" pattern="[0-9]*" formControlName="langCtrl">
           </mat-form-field>
           <br>
           <mat-form-field>
             <mat-label>Non-Strategic Language Courses</mat-label>
-            <input matInput [(ngModel)]="nonStratLangCourses" type="number" formControlName="langCtrl">
+            <input matInput [(ngModel)]="nonStratLangCourses" type="number" inputmode="numeric" pattern="[0-9]*" formControlName="langCtrl">
           </mat-form-field>
           <hr>
           <div>
@@ -84,12 +86,12 @@
           <br>
           <mat-form-field>
             <mat-label>Ranking (1 is highest)</mat-label>
-            <input matInput [(ngModel)]="ranking" type="number" class="number" formControlName="pmspOmsRankingCtrl">
+            <input matInput [(ngModel)]="ranking" type="number" inputmode="numeric" pattern="[0-9]*" class="number" formControlName="pmspOmsRankingCtrl">
           </mat-form-field>
           <br>
           <mat-form-field>
             <mat-label>Total People in MS Year</mat-label>
-            <input matInput [(ngModel)]="totalPeople" type="number" class="number" formControlName="pmspOmsRankingCtrl">
+            <input matInput [(ngModel)]="totalPeople" type="number" inputmode="numeric" pattern="[0-9]*" class="number" formControlName="pmspOmsRankingCtrl">
           </mat-form-field>
           <br>
           <mat-form-field>
@@ -417,6 +419,7 @@
             <input matInput placeholder="Fall APFT"
                     type="number"
                     [(ngModel)]="fallAPFT"
+                    inputmode="numeric" pattern="[0-9]*"
                     formControlName="apftCtrl"
                     min="0"
                     max="300">
@@ -426,6 +429,7 @@
             <input matInput placeholder="Spring APFT"
                     type="number"
                     [(ngModel)]="springAPFT"
+                    inputmode="numeric" pattern="[0-9]*"
                     formControlName="apftCtrl"
                     min="0"
                     max="300">
@@ -435,6 +439,7 @@
             <input matInput placeholder="Camp APFT"
                     type="number"
                     [(ngModel)]="acAPFT"
+                    inputmode="numeric" pattern="[0-9]*"
                     formControlName="apftCtrl"
                     min="0"
                     max="300">

@@ -1,9 +1,119 @@
 class Weights {
 
+  /*
+    TODO: This explanation could use some work.
 
-    // BRANCHING INFORMATION
-    branchList = ['AD', 'AG', 'AR', 'AV', 'CM', 'CY', 'EN', 'FA', 'FI', 'IN', 'MI', 'MP', 'MS', 'OD', 'QM', 'SC', 'TC'];
-    detailedBranch = {
+    For every weight, there is often a 'cutoff' i.e. a point value that
+    separates two different weight-slopes. Best illustrated with the example
+    of GPA in FY19:
+
+    The min/max value for GPA is 0.0/4.0. The cutoff value for GPA is 2.8.
+    This means that a .1 increase in GPA below 2.8 leads to a .1/2.8 ~= 3.6%
+    increase in OML points. ABOVE the cutoff, a .1 increase in GPA leads to a .1/(4.0 - 2.8) ~= 8.3% increase
+    in OML points.
+
+    Further, especially in the case of GPA, the number of OML points received at cutoff is 6.2
+    out of a total of 31 possible points. Meaning a .1 increase after cutoff nets far more points
+    than a .1 increase below cutoff. The cutoff, cutoffPoints, and specific weights of everything
+    can be adjusted in this file.
+  */
+
+  // WEIGHTING
+
+  // GPA
+  gpaCutoff = 2.8;
+  gpaCutoffPoints = 6.2;
+  gpaMaxVal = 4.0;
+  gpaMaxPoints = 31;
+
+  // ADM4
+  adm4MaxPoints = 4;
+
+  // Language
+  languageCutoff = 9;
+  languageCutoffPoints = 2.5;
+  languageMaxVal = 45;
+  languageMaxPoints = 5;
+
+  strategicLanguageMajorValue = 45;
+  nonStrategicLanguageMajorValue = 30;
+  strategicLanguageCourseValue = 5;
+  nonStrategicLanguageCourseValue = 3;
+
+  // PMS POTENTIAL
+  pmspOMSMaxPoints = 14;
+  pmspOMSOptions = {
+    TOP: 14,
+    MQ: 10.5,
+    HQ: 7,
+    Q: 3.5,
+    NQ: 0
+  };
+
+  // RANKING
+  rankingMaxPoints = 7;
+
+  // ADVANCED CAMP
+  campMaxPoints = 15;
+  coerOMSOptions = {
+    TOP: 15,
+    E: 11.25,
+    P: 7.5,
+    C: 3.75,
+    U: 0
+  };
+
+  // RECONDO
+  recondoPoints = 1;
+
+  // EXTRACURRICULARS
+  // ec = extracurricular
+  ecCutoff = 40;
+  ecCutoffPoints = 2.5;
+  ecMaxVal = 100;
+  ecMaxPoints = 5;
+
+  ecTrainingValue = 5;
+  ecBandMemberValue = 5;
+  ecColorGuardValue = 5;
+  ecCommunityServiceValue = 5;
+  ecDrillTeamValue = 5;
+  ecElectedOfficialValue = 10;
+  ecLeaderPresidentCaptainValue = 10;
+  ecTutorValue = 5;
+  ecROTCRecruiterValue = 5;
+  ecRangerChallengeValue = 5;
+  ecResidentAdvisorValue = 10;
+  ecStudentGovernmentValue = 5;
+
+  // MATURITY RESPONSIBILITY
+  // mr = maturity responsibility
+  mrMaxVal = 60;
+  mrMaxPoints = 3;
+
+  mrFullTimeValue = 20;
+  mrPartTimeValue = 10;
+  mrNGSMPValue = 10;
+
+  // APFT
+  apftCutoff = 236;
+  apftCutoffPoints = 1.2;
+  apftMaxVal = 300;
+  apftMaxPoints = 6;
+
+  // ATHLETICS
+  athleticsCutoff = 15;
+  athleticsCutoffPoints = 1.5;
+  athleticsMaxVal = 60;
+  athleticsMaxPoints = 3;
+
+  athleticsVarsityValue = 20;
+  athleticsIMValue = 10;
+  athleticsCommunityValue = 5;
+
+  // BRANCHING INFORMATION
+  branchList = ['AD', 'AG', 'AR', 'AV', 'CM', 'CY', 'EN', 'FA', 'FI', 'IN', 'MI', 'MP', 'MS', 'OD', 'QM', 'SC', 'TC'];
+  detailedBranch = {
       AD: 'Air Defense Artillery',
       AG: 'Adjutant General',
       AR: 'Armor',
