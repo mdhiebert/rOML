@@ -80,6 +80,7 @@ export class MainComponent implements OnInit {
   stratLangCourses = 0;
   nonStratLangCourses = 0;
   languagePoints = 0;
+  studyAbroad = false;
 
 //
 // ────────────────────────────────────────────────────────── END OF LANGUAGE ─────
@@ -287,6 +288,7 @@ export class MainComponent implements OnInit {
 
     if (this.stratLangMaj) { runningScore += weights.strategicLanguageMajorValue; }
     if (this.nonstratLangMaj) { runningScore += weights.nonStrategicLanguageMajorValue; }
+    if (this.studyAbroad) { runningScore += weights.studyAbroadValue; }
     runningScore += this.stratLangCourses * weights.strategicLanguageCourseValue;
     runningScore += this.nonStratLangCourses * weights.nonStrategicLanguageCourseValue;
 

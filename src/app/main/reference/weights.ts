@@ -39,6 +39,7 @@ class Weights {
   nonStrategicLanguageMajorValue = 30;
   strategicLanguageCourseValue = 5;
   nonStrategicLanguageCourseValue = 3;
+  studyAbroadValue = 10;
 
   // PMS POTENTIAL
   pmspOMSMaxPoints = 14;
